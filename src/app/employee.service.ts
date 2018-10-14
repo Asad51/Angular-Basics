@@ -11,7 +11,7 @@ import { IEmployee } from './employee';
 })
 export class EmployeeService {
 
-	private _url: string = '/assets/data/employeesss.json';
+	private _url: string = '/assets/data/employees.json';
 
   constructor( private http: HttpClient ) { }
 
