@@ -1,4 +1,4 @@
 <h4>Department List</h4>
 <ul>
-	<li (click)="onSelect(dpt)" *ngFor="let dpt of departments"><span class="badge badge-info">{{dpt.id}}</span> {{dpt.name}}</li>
+	<li (click)="onSelect(dpt)" [class.bg-info]="isSelected(dpt)" *ngFor="let dpt of departments"><span class="badge badge-info">{{dpt.id}}</span> {{dpt.name}}</li>
 </ul>

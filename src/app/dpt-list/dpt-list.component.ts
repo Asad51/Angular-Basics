@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-dpt-list',
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class DptListComponent implements OnInit {
 
+  public selectedId;
 	departments =  [
 		{ "id": 1, "name": "Mongodb" },
 		{ "id": 2, "name": "NodeJs" },
@@ -15,13 +16,21 @@ export class DptListComponent implements OnInit {
 		{ "id": 4, "name": "Angularjs" }
 	];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      let id = parseInt(params.get('id'));
+      this.selectedId = id;
+    });
   }
 
   onSelect(dpt){
-  	this.router.navigate(["/dpt-list", dpt.id])
+  	//this.router.navigate(["/dpt-list", dpt.id])
+    this.router.navigate([dpt.id], {relativeTo: this.route});
   }
 
+  isSelected(dpt){
+    return dpt.id === this.selectedId;
+  }
 }
