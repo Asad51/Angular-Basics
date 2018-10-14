@@ -1,4 +1,12 @@
 <h5>Your department id is {{dptId}}</h5>
+
+<p>
+	<button class="btn" (click)="showOverview()">Overview</button>
+	<button class="btn"  (click)="showContact()">Contact</button>
+</p>
+
+<router-outlet></router-outlet>
+
 <button class="btn btn-info" (click)="goPrevious()">Previous</button>
 <button class="btn btn-info" (click)="goNext()">Next</button>
 <div>

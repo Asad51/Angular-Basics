@@ -35,4 +35,12 @@ export class DptDetailsComponent implements OnInit {
   	//this.router.navigate(['/dpt-list', {id: selectedId}]); 
   	this.router.navigate(["../", {id: selectedId}], {relativeTo: this.route});
   }
+
+  showOverview(){
+    this.router.navigate(['overview'], {relativeTo: this.route});
+  }
+
+  showContact(){
+    this.router.navigate(['contact'], {relativeTo: this.route});
+  }
 }

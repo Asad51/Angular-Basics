@@ -11,6 +11,8 @@ import { DptDetailsComponent } from './dpt-details/dpt-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { DptOverviewComponent } from './dpt-overview/dpt-overview.component';
+import { DptContactComponent } from './dpt-contact/dpt-contact.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { AppRoutingModule } from './app-routing.module';
     EmpDetailsComponent,
     DptListComponent,
     DptDetailsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DptOverviewComponent,
+    DptContactComponent
   ],
   imports: [
     BrowserModule,
