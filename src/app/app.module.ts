@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from "./app.component";
 import { EmployeeListComponent } from "./employee-list/employee-list.component";
@@ -17,6 +18,8 @@ import { DptContactComponent } from "./dpt-contact/dpt-contact.component";
 import { HeaderComponent } from "./header/header.component";
 import { TdfComponent } from "./tdf/tdf.component";
 import { FormsComponent } from "./forms/forms.component";
+import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.component';
+import { from } from "rxjs";
 
 @NgModule({
     declarations: [
@@ -30,13 +33,15 @@ import { FormsComponent } from "./forms/forms.component";
         DptContactComponent,
         HeaderComponent,
         TdfComponent,
-        FormsComponent
+        FormsComponent,
+        ReactiveFormsComponent
     ],
     imports: [
         BrowserModule, 
         HttpClientModule, 
         AppRoutingModule, 
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [EmployeeService],
     bootstrap: [AppComponent]

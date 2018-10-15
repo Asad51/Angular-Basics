@@ -9,6 +9,7 @@ import { DptContactComponent } from "./dpt-contact/dpt-contact.component";
 import { EmployeeListComponent } from "./employee-list/employee-list.component";
 import { FormsComponent } from "./forms/forms.component";
 import { TdfComponent } from "./tdf/tdf.component";
+import { ReactiveFormsComponent } from './reactive-forms/reactive-forms.component';
 
 const routes: Routes = [
     { path: "", redirectTo: "employee-list", pathMatch: "full" },
@@ -24,6 +25,7 @@ const routes: Routes = [
     },
     { path: "forms", component: FormsComponent },
     { path: "forms/tdf", component: TdfComponent },
+    { path: "forms/reactive-forms", component: ReactiveFormsComponent },
     { path: "**", component: PageNotFoundComponent }
 ];
 
