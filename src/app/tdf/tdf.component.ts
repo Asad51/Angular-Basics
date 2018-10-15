@@ -1,5 +1,6 @@
 import { Component, OnInit, NgModule } from "@angular/core";
 import { User } from "./user";
+import { EnrollmentService } from '../enrollment.service';
 
 @Component({
     selector: "app-tdf",
@@ -19,6 +20,14 @@ export class TdfComponent implements OnInit {
     );
     
     topicError = true;
+    submitted = false;
+
+    errMsg = "";
+
+    constructor( private _enrollment: EnrollmentService) {}
+
+    ngOnInit() {}
+
     validateTopic(value){
         this.topicError = true;
         for(let i=0; i<this.topics.length; i++){
@@ -30,10 +39,11 @@ export class TdfComponent implements OnInit {
     }
 
     onSubmit(){
-        console.log(this.userModel);
+        this._enrollment.enroll(this.userModel)
+        .subscribe(
+            data => console.log("success", data),
+            error => this.errMsg = error.statusText
+        )
+        this.submitted = true;
     }
-
-    constructor() {}
-
-    ngOnInit() {}
 }

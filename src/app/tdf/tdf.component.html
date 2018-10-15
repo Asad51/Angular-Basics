@@ -1,6 +1,9 @@
 <div class="container-fluid">
     <h2>Sign Up For Course</h2>
-    <form #userForm="ngForm" (submit)="onSubmit()" novalidate>
+    <div class="alert alert-danger" *ngIf="errMsg">
+        {{errMsg}}
+    </div>
+    <form *ngIf="!submitted" #userForm="ngForm" (submit)="onSubmit()" novalidate>
 
         <div class="form-group">
             <label>Name</label>

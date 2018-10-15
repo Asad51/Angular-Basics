@@ -32,7 +32,12 @@ import { FormsComponent } from "./forms/forms.component";
         TdfComponent,
         FormsComponent
     ],
-    imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
+    imports: [
+        BrowserModule, 
+        HttpClientModule, 
+        AppRoutingModule, 
+        FormsModule
+    ],
     providers: [EmployeeService],
     bootstrap: [AppComponent]
 })
