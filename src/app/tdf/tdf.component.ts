@@ -10,16 +10,30 @@ export class TdfComponent implements OnInit {
     topics = ["Angular", "Vue", "React"];
     //userModel = new User();
     userModel = new User(
-        "Asad",
+        "",
         "asad@gmail.com",
-        "+880162525",
+        74643433,
         "Angular",
         "morning",
         true
     );
+    
+    topicError = true;
+    validateTopic(value){
+        this.topicError = true;
+        for(let i=0; i<this.topics.length; i++){
+            if(value === this.topics[i]){
+                this.topicError = false;
+                break;
+            }
+        }
+    }
+
+    onSubmit(){
+        console.log(this.userModel);
+    }
 
     constructor() {}
 
     ngOnInit() {}
-    onSubmit() {}
 }
