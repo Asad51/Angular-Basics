@@ -25,20 +25,40 @@ export class ReactiveFormsComponent implements OnInit {
         return this.registrationForm.get("username");
     }
 
+    get email(){
+        return this.registrationForm.get('email');
+    }
+
     constructor( private fb: FormBuilder) {}
 
-    registrationForm = this.fb.group({
-        username: ["", [Validators.required, Validators.minLength(4), forbiddenNameValidator(/admin/)]],
-        password: ['', Validators.required],
-        confirmPassword: [''],
-        address: this.fb.group({
-            city: [''],
-            state: [''],
-            country: ['Bangladesh']
-        })
-    }, {Validator: passwordValidator} );
+    registrationForm: FormGroup;
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.registrationForm = this.fb.group({
+            username: ["", [Validators.required, Validators.minLength(4), forbiddenNameValidator(/admin/)]],
+            email: [''],
+            password: ['', Validators.required],
+            confirmPassword: [''],
+            address: this.fb.group({
+                city: [''],
+                state: [''],
+                country: ['Bangladesh']
+            }),
+            subscribe: [false]
+        }, {Validator: passwordValidator} );
+
+        this.registrationForm.get('subscribe').valueChanges
+        .subscribe(checkedValue => {
+            const email = this.registrationForm.get('email');
+            if(checkedValue){
+                email.setValidators(Validators.required);
+            }
+            else{
+                email.clearValidators();
+            }
+            email.updateValueAndValidity();
+        });
+    }
 
     loadApiData(){
         // this.registrationForm.setValue({
