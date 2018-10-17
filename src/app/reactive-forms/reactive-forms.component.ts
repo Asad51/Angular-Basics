@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { forbiddenNameValidator } from "./shared/user-name.validator";
 import { passwordValidator } from "./shared/password.validator";
+import { RegistrationService } from '../registration.service';
 
 @Component({
     selector: "app-reactive-forms",
@@ -29,7 +30,15 @@ export class ReactiveFormsComponent implements OnInit {
         return this.registrationForm.get('email');
     }
 
-    constructor( private fb: FormBuilder) {}
+    get alternateEmails(){
+        return this.registrationForm.get('alternateEmails') as FormArray;
+    }
+
+    addAlternateEmail(){
+        this.alternateEmails.push(this.fb.control(''));
+    }
+
+    constructor( private fb: FormBuilder, private rs: RegistrationService) {}
 
     registrationForm: FormGroup;
 
@@ -37,6 +46,7 @@ export class ReactiveFormsComponent implements OnInit {
         this.registrationForm = this.fb.group({
             username: ["", [Validators.required, Validators.minLength(4), forbiddenNameValidator(/admin/)]],
             email: [''],
+            alternateEmails: this.fb.array([]),
             password: ['', Validators.required],
             confirmPassword: [''],
             address: this.fb.group({
@@ -58,6 +68,14 @@ export class ReactiveFormsComponent implements OnInit {
             }
             email.updateValueAndValidity();
         });
+    }
+
+    onSubmit(){
+        this.rs.register(this.registrationForm.value)
+        .subscribe(
+            response => console.log('Success', response),
+            error => console.log('Error', error)
+        );
     }
 
     loadApiData(){
