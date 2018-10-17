@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from "@angular/forms";
 import { forbiddenNameValidator } from "./shared/user-name.validator";
-import { passwordValidator } from "./shared/password.validator";
+//import { passwordValidator } from "./shared/password.validator";
 import { RegistrationService } from '../registration.service';
 
 @Component({
@@ -43,11 +43,13 @@ export class ReactiveFormsComponent implements OnInit {
     registrationForm: FormGroup;
 
     ngOnInit() {
+
+
         this.registrationForm = this.fb.group({
-            username: ["", [Validators.required, Validators.minLength(4), forbiddenNameValidator(/admin/)]],
+            username: ["", [Validators.required, Validators.minLength(4), Validators.pattern('[a-zA-Z0-9 ]*'), forbiddenNameValidator(/admin/)]],
             email: [''],
             alternateEmails: this.fb.array([]),
-            password: ['', Validators.required],
+            password: ['', [Validators.required]],
             confirmPassword: [''],
             address: this.fb.group({
                 city: [''],
@@ -55,7 +57,7 @@ export class ReactiveFormsComponent implements OnInit {
                 country: ['Bangladesh']
             }),
             subscribe: [false]
-        }, {Validator: passwordValidator} );
+        }, { validators: this.validatePassword } );
 
         this.registrationForm.get('subscribe').valueChanges
         .subscribe(checkedValue => {
@@ -68,6 +70,7 @@ export class ReactiveFormsComponent implements OnInit {
             }
             email.updateValueAndValidity();
         });
+
     }
 
     onSubmit(){
@@ -76,6 +79,13 @@ export class ReactiveFormsComponent implements OnInit {
             response => console.log('Success', response),
             error => console.log('Error', error)
         );
+    }
+
+    validatePassword(fg: FormGroup){
+        let pw1 = fg.controls.password.value;
+        let pw2 = fg.controls.confirmPassword.value;
+        
+        return pw1 === pw2 ? null : {misMatch: true};
     }
 
     loadApiData(){
